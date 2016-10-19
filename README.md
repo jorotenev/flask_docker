@@ -105,9 +105,15 @@ Note, that the Procfile and runtime.txt are needed when deploying to Heroku, in 
 # SSL
 Check out [Sabayon](https://github.com/dmathieu/sabayon) - it let's you add a Let's Encrypt certificate to your website for free.
 You deploy the Sabayon app to a different dyno, which set's the ACMA challenge token on our Flask dyno. In the app/main/views.py there's code to handle the challenge.
+
 # TODO
 * Package the web (app) container to an image.
 * [PyCharm Problem](https://youtrack.jetbrains.com/issue/IDEA-157108#tab=Comments) Changing the .env file requires restarting PyCharm for the changes to take effect for versions below PyCharm 2016.2.3
+
 # References
 * [Miguel Grinberg's](https://github.com/miguelgrinberg/flasky)
 * [Flask-Script + Gunicorn](http://stackoverflow.com/questions/14566570/how-to-use-flask-script-and-gunicorn)
+
+
+# Contribute
+Pull requests are more than welcomed :see_no_evil:
