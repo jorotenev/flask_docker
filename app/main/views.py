@@ -1,9 +1,6 @@
 from flask import render_template, abort
 from . import main
-from app.cache import cache
 
-# uncomment the decorator to cache the index page for 60seconds
-# @cache.cached(timeout=60)
 @main.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')

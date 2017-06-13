@@ -2,7 +2,7 @@
 
 
 {% macro flash_messages() %}
-    {# if in the view function, flash() has been used, use this macro to print it   #}
+    {# if in a view function, flash() has been used, use this macro to show the messages it   #}
     {% with messages = get_flashed_messages(with_categories=true) %}
 
     {% for category, message in messages %}

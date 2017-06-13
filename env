@@ -1,9 +1,0 @@
-# set the variables below on all environments
-APP_SETTINGS=development 
-SECRET_KEY=super_secret_key
-
-# If empty, Rollbar will be effectively disabled
-ROLLBAR_ACCESS_TOKEN=
-# If empty, Flask-Cache will not be initialised 
-CACHE_REDIS_PORT=6379
-

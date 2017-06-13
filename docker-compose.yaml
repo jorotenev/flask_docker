@@ -28,13 +28,13 @@ postgres:
   volumes_from:
     - data
   ports:
-    - "5432:5432"
+    - "19999:5432"
 
 redis:
   restart: always
   image: redis:alpine
   ports:
-    - "6379:6379"
+    - "20001:6379"
   hostname: "redis_host"
 
 
@@ -51,4 +51,4 @@ postgres_test:
   volumes_from:
     - data_test
   ports:
-    - "5433:5432"
+    - "20000:5432"

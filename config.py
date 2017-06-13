@@ -17,14 +17,6 @@ class BaseConfig(object):
     ROLLBAR_ENDPOINT = "https://api.rollbar.com/api/1/item/"
     ROLLBAR_ACCESS_TOKEN = os.getenv('ROLLBAR_ACCESS_TOKEN')
 
-    """
-    Depending on the environment, we initialise the
-    redis cache in a different manner. We do that by setting the appropriate
-    config variable. Flask-Cache will see which one is set and use it.
-    Whatever the env, the post is usually 6379.
-    Remove this config var/not setting in the .env will effectively disable the cache
-    """
-    CACHE_REDIS_PORT = "6379"
 
     @staticmethod
     def init_app(app):
@@ -44,7 +36,6 @@ class DevelopmentConfig(BaseConfig):
         DB_USER, DB_PASS, DB_SERVICE, DB_PORT, DB_NAME
     )
 
-    CACHE_REDIS_HOST = 'redis'
 
     @staticmethod
     def init_app(app):
@@ -82,7 +73,6 @@ class StagingConfig(BaseConfig):
     # this is set in the init_app method
     SQLALCHEMY_DATABASE_URI = None
 
-    CACHE_REDIS_HOST = 'localhost'
 
 
     @staticmethod
@@ -99,6 +89,7 @@ class StagingConfig(BaseConfig):
             'DB_PASS':  os.environ.get('PGPASSWORD', None)
         }
         staging_config = None
+        
         if os.environ.get('SEMAPHORE', False):
             staging_config = semaphore
         elif os.environ.get("CODESHIP", False):
@@ -116,9 +107,7 @@ class ProductionConfig(BaseConfig):
 
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
-    # for the cache to be enabled, the CACHE_REDIS_PORT must be set in the BaseConfig.
-    CACHE_REDIS_URL = os.environ.get("REDIS_URL")
-
+  
     @staticmethod
     def init_app(app):
         pass

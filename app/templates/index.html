@@ -3,15 +3,11 @@
 
 {% block styles -%}
     {{ super() }}
-
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main_page.css')}}">
 
-    {% assets 'main_page_css' %}
-        {#  Flask-Assets used. Check the app/__init__.py          #}
-        <link href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
-    {% endassets %}
 
 {% endblock -%}
 
@@ -31,20 +27,13 @@
         </div>
     </header>
 
-
 {% endblock -%}
 
 {% block scripts -%}
 
     {{ super() }}
 
-    {% assets "site_wide_js" %}
-        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
-    {% assets "main_page_js" %}
-        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
-
+    <script type="text/javascript" src="{{url_for('static', filename='js/main_page.js')}}"></script>
 
 
 

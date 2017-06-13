@@ -2,29 +2,12 @@
 {% import 'macros.html' as macro %}
 
 {% block title %}{{  config['SITE_NAME']}}{% endblock %}
-    {% block styles %}
-        {{ super() }}
+    
+{% block styles %}
+    {{ super() }}
 
-        {#
-        this uses Flask-Assets. the bundles is defined on app initialisation(check app.__init__.py
-        #}
-        {% assets 'site_wide_css' %}
-            <link href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
-        {% endassets %}
+{% endblock %}
 
-
-        <script type="text/javascript">
-            window.cookieconsent_options = {
-                "message": "This website uses cookies to ensure you get the best experience.",
-                "dismiss": "Got it!",
-                "learnMore": "More info",
-                "link": null,
-                "theme": "dark-bottom"
-            };
-        </script>
-        {#  Uncomment to enable the cookie consent button #}
-        {# <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>#}
-    {% endblock %}
 
 {% block body %}
 
@@ -41,12 +24,7 @@
 
     {% block scripts %}
         {{ super() }}
-        {#
-        this uses Flask-Assets. the bundles is defined on app initialisation (check app/__init__.py
-        #}
-        {% assets "site_wide_js" %}
-            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-        {% endassets %}
+
     {% endblock %}
 
 {% endblock %}
