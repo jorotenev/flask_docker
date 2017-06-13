@@ -1,0 +1,6 @@
+APP_SETTINGS=development 
+SECRET_KEY=super_secret_key
+
+# If empty, Rollbar will be effectively disabled
+ROLLBAR_ACCESS_TOKEN=
+
