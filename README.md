@@ -62,6 +62,8 @@ will start the Flask app
 * install and login into [heroku-cli](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
 * `heroku create` - creates a new heroku app
 * make changes to the app & commit them
+* `heroku config:set APP_MODE=production`
+* `heroku config:set SECRET_KEY=<something really secret>`
 * `git push heroku master`
 
 # References

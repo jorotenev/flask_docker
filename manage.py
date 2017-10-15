@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import os
 from app import create_app
-from flask.ext.script import Manager, Server
+from flask_script import Manager, Server
 from gunicorn_wsgi import *
 
 try:
