@@ -1,54 +1,12 @@
 # https://docs.docker.com/compose/compose-file
 web:
   restart: always
-  build: .
+  build: . # build an image using the ./Dockerfile
   ports: 
     - "5000:5000"
   expose:
     - "5000"
-  links:
-    - postgres:postgres
-    - postgres_test:postgres_test
-    - redis:redis
   volumes:
     - .:/usr/src/app/
-  env_file: .env
+  env_file: env
   command: python manage.py runserver
-
-
-data:
-  image: postgres:latest
-  volumes:
-    - /var/lib/postgresql
-  command: "true"
-
-postgres:
-  restart: always
-  image: postgres:latest
-  volumes_from:
-    - data
-  ports:
-    - "19999:5432"
-
-redis:
-  restart: always
-  image: redis:alpine
-  ports:
-    - "20001:6379"
-  hostname: "redis_host"
-
-
-# separate db for tests
-data_test:
-  image: postgres:latest
-  volumes:
-    - /var/lib/postgresql
-  command: "true"
-
-postgres_test:
-  restart: always
-  image: postgres:latest
-  volumes_from:
-    - data_test
-  ports:
-    - "20000:5432"

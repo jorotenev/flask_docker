@@ -4,6 +4,8 @@ from flask_script import Command, Option
 The class defines the wsgi server to be used in production.
 This is needed since the default flask dev server is not suitable for production.
 """
+
+
 class Gunicorn(Command):
     description = 'Runs production server with gunicorn'
 
@@ -66,8 +68,8 @@ class Gunicorn(Command):
 
             sys.argv = sys.argv[:1]
             print(sys.argv)
-            print ("Logging to stderr with loglevel '%s'" % loglevel)
-            print ("Starting gunicorn...")
+            print("Logging to stderr with loglevel '%s'" % loglevel)
+            print("Starting gunicorn...")
             return FlaskApplication().run()
         else:
             raise RuntimeError("Unsupported gunicorn version! Required > 0.9.0")

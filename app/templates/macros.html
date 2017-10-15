@@ -1,8 +1,5 @@
-{% import "bootstrap/wtf.html" as wtf %}
-
-
 {% macro flash_messages() %}
-    {# if in a view function, flash() has been used, use this macro to show the messages it   #}
+    {# if in a view function flash() has been used, use this macro to show the flashed message  #}
     {% with messages = get_flashed_messages(with_categories=true) %}
 
     {% for category, message in messages %}
@@ -54,10 +51,11 @@ Example usage:
 {%- endmacro %}
 
 
-{% macro make_link_btn(link, text,color='primary',size='btn-xs', new_page=False, extra_class="") %}
+{% macro make_link_btn(link, text, color='primary',size='btn-xs', new_page=False, extra_class="") %}
     {# given a link and text, make a bootstrap button #}
   <a class="btn btn-{{color}} {{ size }} {{ extra_class }}" href="{{link}}" role="button" target="{{ '_blank' if new_page else '_self' }}">{{text}}</a>
 {% endmacro %}
+
 
 {% macro fa_icon(name, margin_left=0, margin_right=5) %}
     {#
@@ -66,17 +64,5 @@ Example usage:
     :attr name - fa icon, as shown on their site. http://fontawesome.io/icons/
     #}
     <i class="fa fa-{{ name }}" aria-hidden="true" style="margin-right: {{ margin_right }}px; margin-left: {{ margin_left }}px"></i>
-{% endmacro %}
-
-
-{% macro print_copyright_years() %}
-    {% set first_year = 2016 %}
-    {% set current_year =  datetime.now().year %}
-
-    {% if first_year == current_year -%}
-    {{ first_year }}
-    {% else %}
-    {{ first_year }} - {{ current_year }}
-    {% endif %}
 {% endmacro %}
 
