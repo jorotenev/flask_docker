@@ -10,22 +10,21 @@ dependency. The dependency is only used if `APP_MODE` is set to `production`. Th
 
 # Usage
 * Clone
-  * `git clone git@github.com:jorotenev/flask_docker.git`
-  * `mv flask_docker <YOUR_PROJECT_NAME>`
+  * `git clone git@github.com:jorotenev/flask_docker.git <YOUR_PROJECT_NAME>`
   * `cd <YOUR_PROJECT_NAME>`
   * `rm -rf .git && git init` - make a fresh git repo for your project
 
 Then you can either use the terminal or PyCharm
 to run the app:
 
-### With just the terminal
+### With docker-compose
 
-* Rename the `env` file to `.env`
+* Rename the `env` file to `.env`  
 `mv env .env` (if you run in production, remember to pass explicitly the environment variables from this file)
-* And then just do
-`docker-compose build`
-This will pull the necessary docker images
-*   `docker-compose up`
+* And then just do  
+`docker-compose build`  
+to pull the necessary docker images
+*   `docker-compose up`  
 will start the Flask app
 * You can access the app from your browser at `localhost:5000`
 * Voila.
