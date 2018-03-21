@@ -1,4 +1,8 @@
-app/static/gen/
+.env_dev
+.env_test
+
+
+####
 *.webassets-cache
 districtrank.pid
 .env
@@ -11,6 +15,8 @@ tmp/
 venv/
 # Byte-compiled / optimized / DLL files
 __pycache__/
+**/__pycache__/
+**/__pycache__
 *.py[cod]
 *$py.class
 

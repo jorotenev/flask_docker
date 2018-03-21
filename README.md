@@ -1,74 +1,38 @@
-# Purpose
-This repo provides a minimal,`docker-compose`-ready, Flask application, which is ready to be deployed to Heroku.
 
-The structure of the Flask app is based mostly on [Miguel's Flasky](https://github.com/miguelgrinberg/flasky).
+# Run
+* Install [pipenv](https://github.com/pypa/pipenv#installation)
+* `$ pipenv install`
+* `$ pipenv shell`
+* make an `.env_dev` file at the root of the repo with the following structure
+```
+APP_STAGE=development
+SECRET_KEY=not-that-secret
+```
+* Set the following environmental variables
+```
+DOT_ENV_FILE=.env_dev
+FLASK_APP=manage.py # the "new" way flask discovers apps
+```
+* To run the API (see below the Note for PyCharm users)
+`$ flask run --host=0.0.0.0`
 
-# Limitations
-* You can't run the Flask app on a windows machine without docker because of the `gunicorn`
-dependency. The dependency is only used if `APP_MODE` is set to `production`. The limitation doesn't apply if you run the app with docker :)
+#### Note for PyCharm users
+When running via PyCharm and assuming that pipenv is used, you need to select the correct python interpreter.
+```
+$ pipenv shell
+(para_api-tKuPD0ya) $ which python
+/home/georgi/.local/share/virtualenvs/para_api-tKuPD0ya/bin/python
+```
 
+When creating a run configuration, select as "Module name" (the default is to execute a script) `flask` and as Parameters `run --host=0.0.0.0`. For older versions of the IDE, see [this](https://stackoverflow.com/questions/22081065/create-a-pycharm-configuration-that-runs-a-module-a-la-python-m-foo)
 
-# Usage
-* Clone
-  * `git clone git@github.com:jorotenev/flask_docker.git <YOUR_PROJECT_NAME>`
-  * `cd <YOUR_PROJECT_NAME>`
-  * `rm -rf .git && git init` - make a fresh git repo for your project
-
-Then you can either use the terminal or PyCharm
-to run the app:
-
-### With docker-compose
-
-* Rename the `env` file to `.env`  
-`mv env .env` (if you run in production, remember to pass explicitly the environment variables from this file)
-* And then just do  
-`docker-compose build`  
-to pull the necessary docker images
-*   `docker-compose up`  
-will start the Flask app
-* You can access the app from your browser at `localhost:5000`
-* Voila.
-
-### With PyCharm and Docker Compose
-* `Pycharm -> Settings -> Project Interpreter -> (gears button) -> Add remote -> Docker Compose`
-* Select Docker Compose and then click "New" to set up a New connection to Docker (use the defaults; leaving the certs folder empty worked for me). Click ok to go back to the `Configure Remote Python Interpreter`
-* Make sure the `docker-compose.yaml` from this repo is added under the Configuration file(s)
-* Choose `web` as a Service. Press ok
-* Add a new run configuration (Run -> Edit configurations)
-  * Select the `manage.py` file as the Script file
-  * Set `runserver` for the Script parameters
-  * Set the `APP_MODE=development` and `SECRET_KEY=<whatever>` environment variables
-* Press ok. If you **Run** this configuration, you will start the flask app through PyCharm. You can also put breakpoints and **Debug** :)
-
-
-
-## Running tests
-### From the terminal
-
-* `docker-compose run --rm web python manage.py test`
-
-### From PyCharm
-* Add a new run configuration and select Python tests -> Unittests
-* Select the `tests/` folder from this repo as `Target->Path`
-* Set the `APP_MODE=testing` and the `SECRET_KEY=<..>` env variables
-* Run this configuration to run the tests
-* Alternatively, instead of adding Unittests you can add a new Python run configuration and instead of setting `runserver` as the script parameter, set `test`.
-
-
-# Deploy to Heroku
-[Heroku docs](https://devcenter.heroku.com/articles/git#creating-a-heroku-remote)
-
-* install and login into [heroku-cli](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
-* `heroku create` - creates a new heroku app
-* make changes to the app & commit them
-* `heroku config:set APP_MODE=production`
-* `heroku config:set SECRET_KEY=<something really secret>`
-* `git push heroku master`
-
-# References
-* [Miguel Grinberg's](https://github.com/miguelgrinberg/flasky)
-* [Flask-Script + Gunicorn](http://stackoverflow.com/questions/14566570/how-to-use-flask-script-and-gunicorn)
-
-
-# Contribute
-Pull requests are more than welcomed :see_no_evil:
+## Test
+`unittest` is used for the tests.
+To run them via PyCharm
+* You need the '.env_test' file placed in the repo root with
+```
+APP_STAGE=testing
+SECRET_KEY=not-that-secret
+```
+* Create a new Python test run configuration with the `/tests` as the __Path__ target and the root of the repo as a working directory
+* Run the configuration

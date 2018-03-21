@@ -1,42 +1,7 @@
-{% extends "basebase.html" %}
-{% import 'macros.html' as macro %}
-
-{% block styles -%}
-    {{ super() }}
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/main_page.css')}}">
-
-
-{% endblock -%}
-
-
-{% block content -%}
-
-    
-    <header class="intro">
-        <div class="intro-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <h1 class="brand-heading">
-                            It works :)
-                        </h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-{% endblock -%}
-
-{% block scripts -%}
-
-    {{ super() }}
-
-    <script type="text/javascript" src="{{url_for('static', filename='js/main_page.js')}}"></script>
-
-
-
-{% endblock %}
+<html>
+    <body>
+        <p>
+            Musaka
+        </p>
+    </body>
+</html>

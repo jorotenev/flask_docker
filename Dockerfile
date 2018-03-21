@@ -1,1 +1,2 @@
-FROM python:3.6.2-onbuild
+FROM kennethreitz/pipenv:latest
+COPY . /app

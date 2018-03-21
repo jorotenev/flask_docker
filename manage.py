@@ -1,44 +1,40 @@
 #!/usr/bin/env python
 import os
-from app import create_app
-from flask_script import Manager, Server
-from gunicorn_wsgi import *
+import sys
+from os.path import dirname, join
+from dotenv import load_dotenv
 
+
+if os.environ.get("ENV_DOT_FILE"):
+    dotenv_path = join(dirname(__file__), os.environ.get("ENV_DOT_FILE"))  # will fail silently if file is missing
+    load_dotenv(dotenv_path, verbose=True)
+else:
+    print("Not using .env file to load env vars")
+
+from app import create_app
+from config import EnvironmentName
+
+app_mode = None
 try:
-    config = os.environ['APP_MODE']
+    app_mode = os.environ['APP_STAGE']
+    print('app mode is %s' % app_mode)
 except KeyError:
-    print("Set the APP_SETTINGS environmental variable: 'development', 'testing', 'staging', 'production")
+    print("Set the APP_STAGE environmental variable: %s" % ",".join(EnvironmentName.all_names()))
     exit(1)
 
-print("Environment from env vars: " + config)
+app = create_app(app_mode)
 
 
-def make_app():
-    return create_app(config)
-
-
-# we can pass a function returning an app to the Manager, instead of passing the Manager an app object
-manager = Manager(make_app)
-
-# Flask local development server vs. Production server
-if config in ['development', 'staging']:
-    manager.add_command("runserver", Server(host="0.0.0.0"))
-else:
-    # http://stackoverflow.com/questions/15693192/heroku-node-js-error-web-process-failed-to-bind-to-port-within-60-seconds-of
-    # the port 5000 is specific to heroku.
-    manager.add_command("runserver", Gunicorn(host="0.0.0.0", port=os.getenv('PORT', 5000)))
-
-
-@manager.command
+@app.cli.command()
 def test():
-    """
-    $ python manage.py test
-    to run our tests
-    """
+    """Run the unit tests."""
     import unittest
     tests = unittest.TestLoader().discover('tests')
-    unittest.TextTestRunner(verbosity=2).run(tests)
+    result = unittest.TextTestRunner(verbosity=2).run(tests)
+    sys.exit(not result.wasSuccessful())
 
 
-if __name__ == '__main__':
-    manager.run()
+
+@app.cli.command()
+def boom():
+    print("command ran in %s" % app.config['APP_STAGE'])

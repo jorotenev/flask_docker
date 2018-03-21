@@ -1,0 +1,11 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[dev-packages]
+
+[packages]
+flask = "==0.12.2"
+requests = "==2.18.4"
+python-dotenv = "==0.7.1"
