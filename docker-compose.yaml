@@ -8,13 +8,11 @@ services:
       - "5000:5000"
     expose:
       - "5000"
-    depends_on:
-      - dynamodb
     environment:
       - FLASK_APP=manage.py
       - FLASK_DEBUG=0
-      - SECRET_KEY=dummy
 
-      - APP_STAGE=testing
-    command: flask test
+      - SECRET_KEY=dummy
+      - APP_STAGE=development
+    command: flask run --host=0.0.0.0
 

@@ -1,5 +1,12 @@
+# flask_docker
+This repo contains skeleton code for a barebone Flask app. The app can be ran via docker-compose too.
 
 # Run
+## To run with docker-compose
+The `pipenv` image is used. Since there's only a `latest` tag, below I reference a specific [image build](https://hub.docker.com/r/kennethreitz/pipenv/builds/btyyzsg7po9kakddpc2lsrm/).
+* `docker image pull kennethreitz/pipenv@sha256:e5ee93444c52f36791f799e611d01b6950d819c676723a13c160a918c7f2d786`
+* `docker-compose up`
+## Manually
 * Install [pipenv](https://github.com/pypa/pipenv#installation)
 * `$ pipenv install`
 * `$ pipenv shell`
@@ -13,11 +20,11 @@ SECRET_KEY=not-that-secret
 DOT_ENV_FILE=.env_dev
 FLASK_APP=manage.py # the "new" way flask discovers apps
 ```
-* To run the API (see below the Note for PyCharm users)
+* To run the flask app (see below the Note for PyCharm users)
 `$ flask run --host=0.0.0.0`
 
 #### Note for PyCharm users
-When running via PyCharm and assuming that pipenv is used, you need to select the correct python interpreter.
+When running via PyCharm and assuming that pipenv is used, you need to select the correct Python [interpreter](https://www.jetbrains.com/help/pycharm/configuring-language-interpreter.html).
 ```
 $ pipenv shell
 (para_api-tKuPD0ya) $ which python
