@@ -9,10 +9,9 @@ services:
     expose:
       - "5000"
     environment:
-      - FLASK_APP=manage.py
       - FLASK_DEBUG=0
 
       - SECRET_KEY=dummy
-      - APP_STAGE=development
+      - FLASK_ENV=development
     command: flask run --host=0.0.0.0
 

@@ -1,12 +1,17 @@
-# config.py
 import os
 
-class BaseConfig(object):
-    APP_STAGE = os.environ['APP_STAGE']
+from dotenv import load_dotenv
 
+# DOT_ENV_FILE holds the name of file in which all environment vars are set.
+# If present, we try to load the vars from this file. it will continue gracefully if file not found etc.
+dot_env_file = os.environ.get("DOT_ENV_FILE")
+if dot_env_file:
+    load_dotenv(dot_env_file, verbose=True)
+
+
+class BaseConfig(object):
     TESTING = False
-    SECRET_KEY = os.environ['SECRET_KEY']  # this will fail if the SECRET_KEY environmental variables is not set
-    CI = False  # are we in a continuous integration environment
+    SECRET_KEY = os.environ['SECRET_KEY']
     SITE_NAME = os.environ.get("SITE_NAME", "site_name.com")
 
     @classmethod
@@ -22,20 +27,11 @@ class DevelopmentConfig(BaseConfig):
 
 
 class TestingConfig(DevelopmentConfig):
-    CI = os.environ.get("CI", False)
-
     TESTING = True
 
     @classmethod
     def init_app(cls, app):
         super(TestingConfig, cls).init_app(app)
-
-
-class StagingConfig(BaseConfig):
-
-    @classmethod
-    def init_app(cls, app):
-        super(StagingConfig, cls).init_app(app)
 
 
 class ProductionConfig(BaseConfig):
@@ -47,11 +43,10 @@ class ProductionConfig(BaseConfig):
 
 class EnvironmentName:
     """
-    use this class to refer to names of environments to ensure you don't mistype a string
+    use this class to refer to names of environments.
     """
     development = 'development'
     testing = 'testing'
-    staging = 'staging'
     production = 'production'
     default = 'default'
 
@@ -64,7 +59,6 @@ class EnvironmentName:
 configs = {
     EnvironmentName.development: DevelopmentConfig,
     EnvironmentName.testing: TestingConfig,
-    EnvironmentName.staging: StagingConfig,
     EnvironmentName.production: ProductionConfig,
     EnvironmentName.default: DevelopmentConfig
 }

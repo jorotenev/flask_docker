@@ -12,13 +12,12 @@ The `pipenv` image is used. Since there's only a `latest` tag, below I reference
 * `$ pipenv shell`
 * make an `.env_dev` file at the root of the repo with the following structure
 ```
-APP_STAGE=development
 SECRET_KEY=not-that-secret
 ```
 * Set the following environmental variables
 ```
 DOT_ENV_FILE=.env_dev
-FLASK_APP=manage.py # the "new" way flask discovers apps
+FLASK_ENV=development
 ```
 * To run the flask app (see below the Note for PyCharm users)
 `$ flask run --host=0.0.0.0`
@@ -38,8 +37,8 @@ When creating a run configuration, select as "Module name" (the default is to ex
 To run them via PyCharm
 * You need the '.env_test' file placed in the repo root with
 ```
-APP_STAGE=testing
 SECRET_KEY=not-that-secret
 ```
+
 * Create a new Python test run configuration with the `/tests` as the __Path__ target and the root of the repo as a working directory
-* Run the configuration
+* Run the configuration with `FLASK_ENV=testing`

@@ -6,6 +6,6 @@ name = "pypi"
 [dev-packages]
 
 [packages]
-flask = "==0.12.2"
+flask = "==1.2"
 requests = "==2.18.4"
-python-dotenv = "==0.7.1"
+python-dotenv = "==0.8.2"
