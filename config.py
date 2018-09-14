@@ -1,12 +1,12 @@
 import os
-
 from dotenv import load_dotenv
 
 # DOT_ENV_FILE holds the name of file in which all environment vars are set.
 # If present, we try to load the vars from this file. it will continue gracefully if file not found etc.
-dot_env_file = os.environ.get("DOT_ENV_FILE")
-if dot_env_file:
-    load_dotenv(dot_env_file, verbose=True)
+dot_env_file = os.environ.get("DOT_ENV")
+abs_path = os.path.realpath(dot_env_file)
+if os.path.isfile(abs_path):
+    load_dotenv(abs_path, verbose=True)
 
 
 class BaseConfig(object):
