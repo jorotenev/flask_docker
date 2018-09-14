@@ -11,9 +11,10 @@ The `pipenv` image is used. Since there's only a `latest` tag, below I reference
 * `$ pipenv install`
 * `$ pipenv shell`
 * You need an `.env_dev` file at the root of the repo with the following contents with `SECRET_KEY` and ` FLASK_ENV=development`  
-* Set the following environmental variable `DOT_ENV=.env_dev`
+* Set the environmental variables `DOT_ENV=.env_dev` and `FLASK_ENV=development` 
 ```
 export DOT_ENV=.env_dev`
+export FLASK_ENV=development`
 ```
 * To run the flask app (see below the Note for PyCharm users)
 `$ flask run --host=0.0.0.0`
@@ -32,6 +33,10 @@ When creating a run configuration, select as "Module name" (the default is to ex
 Example for `unittest`.  
 To run them via PyCharm
 * You need the '.env_test' file placed in the repo root with the `SECRET_KEY` and `FLASK_ENV=testing` env vars  
-* `export DOT_ENV=testing`
+* Export `DOT_ENV` and `FLASK_ENV`  
+```
+export DOT_ENV=.env_test
+export FLASK_ENV=testing
+```
 * Create a new Python test run configuration with the `/tests` as the __Path__ target and the root of the repo as a working directory
 * Run the configuration with `FLASK_ENV=testing`
