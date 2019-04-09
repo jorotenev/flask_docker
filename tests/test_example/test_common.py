@@ -13,9 +13,9 @@ class ExampleTest(BaseTest, HTTPMethodsMixin):
 class ExampleMocking(BaseTest, HTTPMethodsMixin, PatchMixin):
 
     def test_(self):
-        self.mocked_http_get = self.patch('tests.test_example.sample_for_patch.sample.get')
+        self.mocked_time = self.patch('app.helpers.time.utc_now_str')
 
-        self.mocked_http_get.return_value = 'ok'
-        from tests.test_example.sample_for_patch.sample import some_method
+        self.mocked_time.return_value = '1969'
 
-        self.assertEqual(some_method(), 'ok')
+        from app.helpers.time import utc_now_str
+        self.assertEqual(utc_now_str(), '1969')

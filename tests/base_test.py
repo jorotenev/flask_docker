@@ -7,16 +7,23 @@ The HTTP mixin provides common methods to make it easier to make HTTP requests t
 import json
 import unittest
 from flask import url_for, Response
-from config import EnvironmentName
 from app import create_app
 from unittest.mock import patch
+from dotenv import find_dotenv, load_dotenv
 
 
 class BaseTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.app = create_app(config_name=EnvironmentName.testing)
+        path = find_dotenv('.env_test')
+        assert path
+        load_dotenv(path)
+
+        from config import EnvironmentName, configs
+
+        conf = configs[EnvironmentName.testing]
+        cls.app = create_app(conf)
         cls.app.config['SERVER_NAME'] = 'localhost.lo'
 
         cls.app_context = cls.app.app_context()
