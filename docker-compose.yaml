@@ -1,4 +1,5 @@
 # https://docs.docker.com/compose/compose-file
+# written for development expirementation -
 version: '3'
 services:
   web:
@@ -9,9 +10,5 @@ services:
     expose:
       - "5000"
     environment:
-      - FLASK_DEBUG=0
-
-      - SECRET_KEY=dummy
       - FLASK_ENV=development
-    command: flask run --host=0.0.0.0
 

@@ -1,19 +1,8 @@
 import os
-from dotenv import load_dotenv
-
-# from logging import DEBUG, ERROR
-
-# DOT_ENV_FILE holds the name of file in which all environment vars are set.
-# If present, we try to load the vars from this file. it will continue gracefully if file not found etc.
-dot_env_file = os.environ.get("DOT_ENV")
-abs_path = os.path.realpath(dot_env_file) if dot_env_file else None
-if abs_path and os.path.isfile(abs_path):
-    load_dotenv(abs_path, verbose=True)
-
 
 class BaseConfig(object):
     TESTING = False
-    SECRET_KEY = os.environ['SECRET_KEY']
+    # SECRET_KEY = os.environ['SECRET_KEY']
     SITE_NAME = os.environ.get("SITE_NAME", "site_name.com")
     LOG_LEVEL = "DEBUG"
 

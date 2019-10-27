@@ -1,6 +1,6 @@
 import json
 
-from tests.base_test import HTTPMethodsMixin, BaseTest, PatchMixin
+from tests.base import HTTPMethodsMixin, BaseTest, PatchMixin
 
 
 class ExampleTest(BaseTest, HTTPMethodsMixin):

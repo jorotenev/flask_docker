@@ -2,22 +2,15 @@
 This repo contains skeleton code for a barebone Flask app. The app can be ran via docker-compose too.
 
 # Run
-1. You need an `.env` file at the root of the repo with the following contents 
-```
-FLASK_ENV=development
-SECRET_KEY=somesecret
-FLASK_RUN_HOST=0.0.0.0
-FLASK_RUN_PORT=8080
-```
-The `FlASK_RUN_x` are optional.
+
 ## To run with docker-compose
 The `pipenv` image is used. Since there's only a `latest` tag, below I reference a specific [image build](https://hub.docker.com/r/kennethreitz/pipenv/builds/btyyzsg7po9kakddpc2lsrm/).
-* `docker image pull kennethreitz/pipenv@sha256:e5ee93444c52f36791f799e611d01b6950d819c676723a13c160a918c7f2d786`
 * `docker-compose up`
 ## Manually
 * Install [pipenv](https://github.com/pypa/pipenv#installation)
 * `$ pipenv install`
-* `$ pipenv shell`
+* pipenv will output the folder of the new interpreter
+* In PyCharm, add a new interpreted and point to the folder from above + Scripts/pyhton
 * To run the flask app (see below the Note for PyCharm users)
 `$ flask run`
 
@@ -31,6 +24,7 @@ $ pipenv shell
 
 When creating a run configuration, select as "Module name" (the default is to execute a script) `flask` and as Parameters `run`. For older versions of the IDE, see [this](https://stackoverflow.com/questions/22081065/create-a-pycharm-configuration-that-runs-a-module-a-la-python-m-foo)
 
+**Make sure to set the Working directory folder in the run config to the project folder.**
 ## Test
 Example for `unittest`.  
 To run them via PyCharm
